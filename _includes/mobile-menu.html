@@ -1,0 +1,27 @@
+<div id="mobile-menu" class="mobile">
+	<div class="inner-mobile-menu wrap">
+		<div class="mobile-menu-header">
+			<ul class="icons">
+				<li id="menu-icon" class="menu-icon"><div></div></li>
+			</ul>
+		</div>
+		<div class="mobile-menu-content">
+			<ul id="mobile">
+		        {% for item in include.nav %}
+				    <li>
+				        <a href="{{ item.url }}">
+				            {% if item.url == navurl %}
+				                <b>{{ item.text }}</b>
+				            {% else %}
+				                {{ item.text }}
+				            {% endif %}
+				        </a>
+				    </li>
+				    {% if item.subitems and navurl contains item.url %}
+				        {% include nav.html nav=item.subitems %}
+				    {% endif %}
+				{% endfor %}
+		    </ul>
+		</div>
+	</div>
+</div>
