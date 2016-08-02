@@ -31,10 +31,10 @@ tagline: Developing Salesforce together
 <a name="intro"></a>
 
 ## Intro
-
 This document attempts to explain the basic styles and patterns that are used in the Rapid Recovery Salesforce codebase. New code should try to conform to these standards so that it is as easy to maintain as existing code. Of course every rule has an exception, but it's important to know the rules nonetheless. 
 
 <a name="goals"></a>
+
 ### Goals
 The goal of this style guide is like that of any other style guide. Every developer has an opinion as to what makes a codebase clean, objective, and efficient, this style guide was founded on practiced principals within the [Salesforce community](http://salesforce.stackexchange.com/a/54678/10834), and collaborated on GitHub here: [SalesforceStyleGuide](https://github.com/PolarisProject/salesforceStyleGuide).  As long as there's some logic behind that beauty, no one is right or wrong.  But it's important to have a standard so that:
 
@@ -44,30 +44,42 @@ The goal of this style guide is like that of any other style guide. Every develo
 See the Internet for more arguments about why style guides are important and useful things and not just a waste of time.
 
 <a name="sources"></a>
+
 ### Sources
 Since Apex is largely a Java and C# spin-off, this guide is founded on [Google Java Style Guide](http://google-styleguide.googlecode.com/svn/trunk/javaguide.html) first, then C# where those do not apply. Anything not available from those sources is determined within the community and the dev team
 
 This is still a living document so expect changes.
 
 <a name="basics"></a>
+
 ## Basics
+
 <a name="special-characters"></a>
+
 ### Special characters
+
 <a name="whitespace"></a>
+
 #### Whitespace
+
 The only permissible whitespace characters in source code are newline and space (0x20).  Inside of a string literal, only a space is allowed.  Line must not end with spaces (`/ +$/` must not match anything in the file).  Classes should all end with a newline.
 
 <a name="special-escape-sequences"></a>
+
 #### Special escape sequences
+
 For any character that has a special escape sequence (`\b`, `\t`, `\n`, `\f`, `\r`, `\"`, `\'` and `\\`), that sequence is used rather than the corresponding octal (e.g. `\012`) or Unicode (e.g. `\u000a`) escape.
 
 <a name="other-non-ascii-characters"></a>
+
 #### Other Non-ASCII Characters
+
 For the remaining non-ASCII characters, either the actual Unicode character (e.g. `∞`) or the equivalent Unicode escape (e.g. `\u221e`) is used, depending only on which makes the code easier to read and understand.
 
   > Tip: In the Unicode escape case, and occasionally even when actual Unicode characters are used, an explanatory comment can be very helpful.
 
 <a name="structure"></a>
+
 ## Structure
 
 The ordering of the members of a class can have a great effect on learnability, but there is no single correct recipe for how to do it. Different classes may order their members differently.
@@ -75,10 +87,12 @@ The ordering of the members of a class can have a great effect on learnability, 
 What is important is that each class order its members in some logical order, which its maintainer could explain if asked. For example, new methods are not just habitually added to the end of the class, as that would yield "chronological by date added" ordering, which is not a logical ordering.
 
 <a name="indentation"></a>
+
 ### Indentation
 All blocks of code should be indented with 2 spaces.  Spaces, not tabs, to ensure that it looks the same on everyone's screen and doesn't waste horizontal space.
 
 <a name="new-lines-and-spaces"></a>
+
 ### New-lines and spaces
 Use vertical whitespace as appropriate.  Don't be afraid to separate blocks of code.
 
@@ -104,6 +118,7 @@ If using C#-style properties, code should follow the following rules:
  * If one clause has logic and one does not, place the clause without logic on its own line.
 
 <a name="prefer-explicit-declarations"></a>
+
 ### Prefer Explicit Declarations
 Always specify:
 
@@ -112,10 +127,12 @@ Always specify:
 * `this` when calling local methods or setting local members/properties.
 
 <a name="istest"></a>
+
 ### `@isTest`
 In a test method, use the `@isTest` attribute instead of the `testmethod` modifier.
 
 <a name="capitalization"></a>
+
 ### Capitalization
 
 We follow the Java standard of capitalization with the listed exceptions.  That means that statements (`for`, `if`, etc.) should be lowercase, constants should be `UPPER_CASE_WITH_UNDERSCORES`, classes and class-level variables should be declared as `UpperCamelCase`, and methods, parameters and local variables should all be declard as `lowerCamelCase`.
@@ -125,6 +142,7 @@ Native Apex methods and classes should generally be referenced as written in off
 However, when referencing any metadata (SObject, SObjectField, FieldSet, Action, Class, Page, etc.), use the declared capitalization.  Even when referencing a method, field, etc., that is not capitalized according to these rules, still use the declared capitalization.
 
 <a name="commenting"></a>
+
 ### Commenting
 When commenting functions, the `JsDoc` doc style has been adapted to create a `RapRec` style. This uses the `/**` comment block and includes a function description followed by an empty line and the following tags respectively: `@author`, `@date`, `@context`, `@param`, `@return`
 
@@ -159,6 +177,7 @@ public void test(Map<Id,Account> a, List<Contact> b) {
 _*NOTE:* See [Comment Style Guide Setup](http://kb.raprec.com/public/comment-style-guide-setup/) for a guide to setup the [DoxyDoxygen](http://20tauri.free.fr/DoxyDoxygen/v2/page_overview.php) add-on for easy commenting_
 
 <a name="example"></a>
+
 ### Example
 
 ```java
@@ -215,6 +234,7 @@ public class MyClass {
 
 
 <a name="soql"></a>
+
 ## SOQL
 
 In general, SOQL should be declared inline where it is used.  In some cases, like when referencing FieldSets, it's necessary to build SOQL queries dynamically.  The same rules will generally apply.
@@ -239,6 +259,7 @@ List<Contact> cnts = [SELECT Id, FirstName, LastName, Phone, Email,
 ```
 
 <a name="apex-specific-sobject-constructor-syntax"></a>
+
 ## Apex-Specific SObject Constructor Syntax
 When creating an SObject, generally prefer the Apex-specific syntax wherein all fields can be initialized from the constructor.  When using this syntax, choose a different line for each property so that diff-ing and versioning is easier.
 
@@ -253,10 +274,12 @@ Contact c = new Contact(RecordTypeId = CONTACT_RECORDTYPE_ID,
 ```
 
 <a name="teststarttest-and-teststoptest"></a>
+
 ## Test.startTest() and Test.stopTest()
 When writing test cases, always use `Test.startTest();` and `Test.stopTest();`.  Do not indent the code between those method calls, but do use one line of vertical whitespace above and below those method calls to seprate those lines from surrounding code.
 
 <a name="naming-conventions"></a>
+
 ## Naming Conventions
 All method name should reflect the scope of the method itself with respect to its namespace. Method names should not be derived by the feature scope or overarching functionality.
 
@@ -267,13 +290,16 @@ If a method is private to its class then it should be prefixed with an underscor
 If the method is returning a `Boolean` response, then it should be prefixed with `is` or `has`
 
 <a name="class-and-trigger"></a>
+
 ### Class and Trigger
 Name a class or trigger after what it does.  Triggers should be verbs and end with `Trigger` (e.g., `SyncCaseToplineWithDescriptionTrigger`).  Controllers and Controller Extensions should end with the word `Controller`.
 
 <a name="methods"></a>
+
 ### Methods
 Methods should all be verbs.  Getters and setters should have no side effects (with the exception of setting up cached values and/or logging), and should begin with `get` or `set`.
 
 <a name="test-classes"></a>
+
 ### Test classes
 Test classes should be named `TEST_ClassUnderTest`.  If the test is not a unit-level test but instead a broader test case, it it should be named `TEST_StuffThatsGenerallyBeingTested`.
