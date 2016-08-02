@@ -4,8 +4,6 @@ title: Apex Style Guide
 tagline: Developing Salesforce together
 ---
 
-<!-- MarkdownTOC depth=0 autolink=true autoanchor=true bracket=round -->
-
 - [Intro](#intro)
   - [Goals](#goals)
   - [Sources](#sources)
