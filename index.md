@@ -32,6 +32,7 @@ tagline: Developing Salesforce together
 
 <a name="intro"></a>
 ## Intro
+
 This document attempts to explain the basic styles and patterns that are used in the Rapid Recovery Salesforce codebase. New code should try to conform to these standards so that it is as easy to maintain as existing code. Of course every rule has an exception, but it's important to know the rules nonetheless. 
 
 <a name="goals"></a>
