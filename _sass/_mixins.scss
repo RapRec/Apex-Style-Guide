@@ -1,0 +1,87 @@
+/******************************************************************
+Site Name: Div Ready
+Stylesheet: Mixins & Constants Stylesheet
+******************************************************************/
+
+/*********************
+EXTENDED CLASS
+*********************/
+$grid: 1140px;
+@mixin wrap($extend: false) {
+  @if $extend { @extend %wrap; }
+  @else { width: 96%; margin: 0 auto; max-width: $grid; }
+}
+%wrap { @include wrap; }
+.wrap { @include wrap(true); }
+
+/*********************
+ * THEME COLORS
+*********************/
+
+/* Base Colors */
+$white:		#fff;
+$black:		#000;
+$grey:		#808080;
+$bgr: 		#fff; /* Background */
+
+/* Theme Colors */
+$primary: #1f282f;
+	$primary-dk: #12181e;
+	$primary-md: darken($primary,1%);
+	$primary-lt: lighten($primary,10%);
+$secondary: #96bfb0;
+	$secondary-dk: darken($secondary,10%);
+	$secondary-md: darken($secondary,1%);
+	$secondary-lt: lighten($secondary,10%);
+$accent: #ffc224;
+	$accent-dk: darken($accent,10%);
+	$accent-lt: lighten($accent,10%);
+$link-color: $primary;
+	$link-color-dk: darken($link-color,10%);
+	$link-color-lt: lighten($link-color,10%);
+	$link-hover: $link-color-lt;
+
+$nav-bgr: #111;
+$nav-hover-bgr: #333;
+$nav-current-bgr: $primary-dk;
+
+/*********************
+TYPOGRAPHY
+*********************/
+$sans-serif:       	Helvetica, Arial, sans-serif;
+$serif:          	'Times New Roman', Georgia, serif;
+
+	// @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700);
+	// @import url(https://fonts.googleapis.com/css?family=Arvo:400,700);
+
+	// @font-face {
+	//     font-family: 'OpenSansLight';
+	//     src: url('../fonts/OpenSans-Light-webfont.eot');
+	//     src: url('../fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+	//          url('../fonts/OpenSans-Light-webfont.woff') format('woff'),
+	//          url('../fonts/OpenSans-Light-webfont.ttf') format('truetype'),
+	//          url('../fonts/OpenSans-Light-webfont.svg#OpenSansLight') format('svg');
+	//     font-weight: normal;
+	//     font-style: normal;
+	
+	// }
+
+/*********************
+ * THEME SPRITE
+ * @include sprite(0,0);
+ *********************/
+@mixin sprite($posX, $posY){
+	background: url(../images/sprite.png) $posX $posY no-repeat transparent;
+	background-size: 1600px;
+}
+@mixin sprite_x2($posX, $posY){
+	background: url(../images/sprite.png) $posX $posY no-repeat transparent;
+	/* WARNING: IF sprite image is made for retina */
+	/* This should be half the size of the sprite.png's original size */
+	background-size: 800px;
+}
+
+@mixin mobile-sprite($posX, $posY){
+	background: url(../images/mobile-sprite.png) $posX $posY no-repeat transparent;
+	background-size: 227px; 
+}
