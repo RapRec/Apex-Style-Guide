@@ -1,0 +1,154 @@
+.mobile{ display: none; }
+.full{ display: block; }
+
+$nav_pad: 20px;
+
+nav {
+  background: $nav-bgr; //default navigation color
+  
+  .inner{
+    background: $nav-bgr; //default navigation color
+    padding: 0px;
+    border: 0;
+
+    ul{
+      margin: 0px !important;
+      padding: 0px !important;
+      height: 61px;
+      li {
+        list-style-type: none;
+        display: inline-block;
+        font-size: .9em;
+
+        a, a:visited {
+          border-bottom: 0;
+          padding: 20px $nav_pad;
+          font-size: 1em;
+          background-color: transparent;
+          text-transform: uppercase;
+          color: $white;
+          float: left;
+          
+          &:hover {
+            background-color: $nav-hover-bgr;
+            text-decoration: none;
+          }
+        }
+        // first dropdown
+        ul.sub-menu,
+        ul.children {
+          margin-top: 68px;
+          position: absolute;
+          left: 0;
+          max-height: 0; // used in lieu of display: none for CSS transition to work
+          overflow: hidden; // needed to work with the max-height propery
+          opacity: 0;
+          z-index: 8999;
+          background: lighten($nav-bgr,10%);
+          list-style-type: none;
+
+          // add CSS3 Hoverintent - thanks to jhogue on CodePen: http://codepen.io/jhogue/pen/payuj
+          // combined with the max-height workaround so they roll out nicely
+          // (using max-height:0->max-height:999em instead of a display:none -> display:block *or* left:-999em -> left:0)
+          // this will need a workaround for older browsers like a fallback to display:none/display:block
+          @include transition(.25s);
+
+          &:hover {overflow: visible;}
+
+          li {
+            a {
+              display: block;
+              width: 200px;   // the <a> might overhang the ul.submenu container in IE 7 so the width needs tested/adjusted accordingly in  _781up-navIE.scss
+              background: none;
+
+              &:hover {background: lighten($nav-hover-bgr,10%);}
+            }
+
+            /* highlight sub-menu current page */
+            li.current-menu-item,
+            li.current_page_item,
+            li.current-page-ancestor {
+              a {
+                background-color: $nav-current-bgr;
+                color: $link-hover;
+              }
+            }
+
+            // 3rd tier
+            ul {
+              margin-top: 0px !important;
+              top: 0;
+              left: 100%;
+              max-height: 0;
+              overflow: hidden;
+              z-index: 8999;
+              background: lighten($nav-bgr, 20%);
+              opacity: 0;
+
+              li {
+                a {
+                  &:hover,
+                  &:focus {
+                    background: lighten($nav-hover-bgr, 20%);
+                  }
+                }
+              }
+            } // end 3rd tier ul
+            // show sub-menu for tier 3
+            &:hover ul {
+              overflow: visible;
+              max-height: 999em;
+              opacity: 1;
+              // CSS3 Hoverintent
+              -webkit-transition-delay: .25s;
+              transition-delay: .25s;
+            }
+          }
+
+        }
+
+        /* showing sub-menus for tier 2 */
+        &:hover ul {
+          top: auto;
+          display: block;
+          left: 0;
+          max-height: 999em; // for css transition
+          opacity: 1;
+
+          // CSS3 Hoverintent
+          -webkit-transition-delay: .25s;
+          transition-delay: .25s;
+        }
+
+      } /* end .nav ul li */
+
+      li.logo {
+        padding: 0 $nav_pad;
+        height: 68px;
+        a {
+          padding: 0;
+          @include vertical-align();
+          &:hover{
+            background-color: transparent;
+          }
+        }
+      }
+
+      li.parent > a:after {
+        color: #ccc;
+        content: ' \00BB';
+        font-size: .8em;
+        vertical-align: 1px;
+      }
+
+      /* add sub-menu parent item styling */
+      .sub-menu li.parent > a:after {
+        color: #ccc;
+        content: ' \00BB';
+        font-size: .8em;
+        vertical-align: 1px;
+      }
+    }
+  } /* end .nav */
+
+} /* end nav */
