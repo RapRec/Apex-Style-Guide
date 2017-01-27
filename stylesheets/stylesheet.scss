@@ -1,9 +1,11 @@
+---
+---
 /*******************************************************************************
 Slate Theme for GitHub Pages
 by Jason Costello, @jsncostello
 *******************************************************************************/
 
-@import url(github-light.css);
+@import url(pygment_trac.css);
 
 @import "mixins-framework";
 @import "mixins";
@@ -332,7 +334,6 @@ Full-Width Styles
 }
 
 #downloads {
-  display: none;
   position: absolute;
   width: 210px;
   z-index: 10;
