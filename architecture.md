@@ -4,9 +4,7 @@ title: Apex Architecture
 tagline: Architecting Salesforce together
 ---
 
-- [Architecture](#architecture)
-  - [Goals](#goals)
-  - [Sources](#sources)
+- [Intro](#intro)
 - [Patterns of Enterprise Application Architecture (P of EAA)](#peaa)
   - [Service Layer](#fowler-service-layer)
   - [Domain Model Layer](#fowler-domain-layer)
@@ -20,9 +18,9 @@ tagline: Architecting Salesforce together
 - [Outline of Implementation](#outline)
 - [Summary](#summary)
 
-<a name="architecture"></a>
+<a name="intro"></a>
 
-# Architecture
+# Intro
 
 Force.com (APEX) development within the Salesforce platform can be difficult to navigate through with its governing limits, limitations of the APEX language itself, and even just the complexity of the multifacited tool that Salesforce is to a business. For this reason careful planning and design are important to growing business processes. This document outlines the underlying architecture and thought behind the codebase within the Rapid Recovery Salesforce org.
 
